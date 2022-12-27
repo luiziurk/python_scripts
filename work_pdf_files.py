@@ -202,16 +202,6 @@ def fetch_expenses(text):
             expense_details["AMOUNT"].append(amount)
     df = pd.DataFrame(expense_details)
 
-<<<<<<< HEAD
-    df["DATE_SPENT"] = df["DATE_SPENT"].astype(np.datetime64)
-    df["DATE_EFFECTIVE"] = df["DATE_EFFECTIVE"].astype(np.datetime64)
-    df["AMOUNT"] = df["AMOUNT"].astype(str).str.replace(".", "", regex=True)
-    df["AMOUNT"] = df["AMOUNT"].astype(str).str.replace(",", ".", regex=True)
-    df["AMOUNT"] = df["AMOUNT"].astype(np.float_)
-    #df_detailed["AMOUNT"] = pd.to_numeric(df_detailed["AMOUNT"])
-||||||| c1e7cd8
-    return expense_details
-=======
     df["DATE_SPENT"] = df["DATE_SPENT"].astype(np.datetime64)
     df["DATE_EFFECTIVE"] = df["DATE_EFFECTIVE"].astype(np.datetime64)
     df["AMOUNT"] = df["AMOUNT"].astype(str).str.replace(".", "", regex=True)
@@ -220,29 +210,6 @@ def fetch_expenses(text):
     # df_detailed["AMOUNT"] = pd.to_numeric(df_detailed["AMOUNT"])
 
     return df
->>>>>>> b60f38db0a217dcabcf49c42cf023e8a5081ca5d
-
-
-<<<<<<< HEAD
-||||||| c1e7cd8
-rand_file = fetch_file(files[rnd.randint(0, len(files) - 1)])
-=======
-#%%
-print("Creating the Data Frames", flush=True)
-df_summary = pd.DataFrame({"DESCRIPTION": [], "DATE": [], "AMOUNT": [], "PERIOD": []})
-df_detailed = pd.DataFrame(
-    {
-        "DESCRIPTION": [],
-        "COUNTRY": [],
-        "DATE_SPENT": [],
-        "DATE_EFFECTIVE": [],
-        "AMOUNT": [],
-    }
-)
->>>>>>> b60f38db0a217dcabcf49c42cf023e8a5081ca5d
-
-<<<<<<< HEAD
-    return df
 
 
 #%%
@@ -258,60 +225,6 @@ df_detailed = pd.DataFrame(
     }
 )
 
-print("Looping Over the Files", flush=True)
-for f in files:
-    # It is very important that the file name follows the same structure
-    print(f"Working on file {f} ", flush=True)
-
-    date = f[-10:-6] + "/" + f[-6:-4] + "/01"
-    date = datetime.strptime(date, "%Y/%m/%d")
-    t = fetch_file(f)
-    print("Fetching the Summary Expense", flush=True)
-    df_sum_k = fetch_summary(t)
-    print("Adding the Period", flush=True)
-    df_sum_k["PERIOD"] = date
-    print("Concatenating the data", flush=True)
-    df_summary = pd.concat([df_summary, df_sum_k])
-    print("Fetching Detailed Expenses", flush=True)
-    df_det_k = fetch_expenses(t)
-    print("Concatenating the data", flush=True)
-    df_detailed = pd.concat([df_detailed, df_det_k])
-
-
-print("Resetting the indexes", flush=True)
-df_summary = df_summary.reset_index(drop=True)
-df_detailed = df_detailed.reset_index(drop=True)
-# Discarding the Previous saldo Lines to avoid double charging
-df_summary_wo_previous = df_summary[
-    ~(
-        df_summary["DESCRIPTION"].str.startswith("Ancien")
-        | df_summary["DESCRIPTION"].str.startswith("Vorig")
-    )
-]
-df_summary_wo_previous["CUMSUM"] = df_summary_wo_previous["AMOUNT"].cumsum()
-df_summary_wo_previous["CUMSUM"] = df_summary_wo_previous["CUMSUM"].apply(
-    lambda x: round(x, 2)
-)
-
-# FIXING THE DOUBLE NAME IN DESCRIPTION
-for i, j in enumerate(df_detailed['DESCRIPTION']):
-    if (len(j.split()))>1 and j.split()[-1] == j.split()[-2]:
-        print(j, flush = True)
-        df_detailed["DESCRIPTION"][i] = " ".join(j.split()[0:-1])
-
-    else:
-        print("OK >>>",j, flush = True)
-        df_detailed["DESCRIPTION"][i] = j
-
-
-
-
-
-#%%
-# Exporting into a file
-||||||| c1e7cd8
-expenses = fetch_expenses(fetch_file(files[rnd.randint(0, len(files) - 1)]))
-=======
 print("Looping Over the Files", flush=True)
 for f in files:
     # It is very important that the file name follows the same structure
@@ -360,4 +273,3 @@ for i, j in enumerate(df_detailed["DESCRIPTION"]):
 
 #%%
 # Exporting into a file
->>>>>>> b60f38db0a217dcabcf49c42cf023e8a5081ca5d
