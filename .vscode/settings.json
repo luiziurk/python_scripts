@@ -1,0 +1,16 @@
+{
+    "jupyter.kernels.filter": [
+        {
+            "path": "d:\\OneDrive\\Treinamentos\\Udacity\\Repositories\\.udacityenv\\Scripts\\python.exe",
+            "type": "pythonEnvironment"
+        },
+        {
+            "path": "c:\\Users\\iurkl\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
+            "type": "pythonEnvironment"
+        },
+        {
+            "path": "d:\\OneDrive\\Treinamentos\\Udacity\\Repositories\\udacityenv\\Scripts\\python.exe",
+            "type": "pythonEnvironment"
+        }
+    ]
+}
